@@ -1,0 +1,104 @@
+
+service: app
+app: grab-menu
+org: slavaast
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+stage: prod
+region: us-east-1
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#    - include-me-dir/**
+#  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/**
+
+functions:
+  
+  publishAppCart:
+    timeout: 10
+    role: arn:aws:iam::067342954645:role/service-role/publishData
+    handler: publishAppCart/publishAppCart.handler
+    events:
+     - http:
+         path: /publish
+         method: post
+         cors: true
+  placeOrder:
+    timeout: 20
+    role: arn:aws:iam::067342954645:role/service-role/sendEmailfromApp-role-cui05r8q
+    handler: placeOrder/placeOrder.handler
+    events:
+     - http:
+         path: /placeOrder
+         method: post
+         cors: true
+  placeOrder2:
+    role: arn:aws:iam::067342954645:role/service-role/sendEmailfromApp-role-cui05r8q
+    handler: placeOrder2/placeOrder2.handler
+    events:
+     - http:
+         path: /placeOrder2
+         method: post
+         cors: true
+  
+  checkOrderPayment:
+    timeout: 10
+    role: arn:aws:iam::067342954645:role/queryOrdersDb
+    handler: checkOrderPayment/checkOrderPayment.handler
+    events:
+     - http:
+         path: /checkOrderPayment
+         method: post
+         cors: true
+  session:
+    timeout: 10
+    role: arn:aws:iam::067342954645:role/update_sessions_table
+    handler: session/session.handler
+    events:
+     - http:
+         path: /session
+         method: post
+         cors: true
+  
+  # getDeliveryCost:
+  #   timeout: 10
+  #   role: arn:aws:iam::067342954645:role/service-role/sendEmailfromApp-role-cui05r8q
+  #   handler: getDeliveryCost/getDeliveryCost.handler
+  #   events:
+  #    - http:
+  #        path: /getDeliveryCost
+  #        method: post
+  #        cors: true
+  
+
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2

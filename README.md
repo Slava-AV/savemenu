@@ -13,4 +13,6 @@ Functional SaaS for restaurant owners to create online menus and process orders.
 - QR-code generation
 - menu is installable as PWA (Progressive Web App)
 
+<img src="https://github.com/Slava-AV/Slava-AV/blob/main/img/savemenu_demo.gif" style="width:188px;">
+
 `This is a copy of a private repository made for informational purposes. Some code is omitted.`

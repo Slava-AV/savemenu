@@ -13,4 +13,4 @@ Functional SaaS for restaurant owners to create online menus and process orders.
 - QR-code generation
 - menu is installable as PWA (Progressive Web App)
 
-`This is a copy of a private repository made for informational purposes. Some code is ommitted.`
+`This is a copy of a private repository made for informational purposes. Some code is omitted.`
